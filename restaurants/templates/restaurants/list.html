@@ -102,4 +102,58 @@
     {% endfor %}
 </div>
 
+{% if restaurants.has_other_pages %}
+<div class="mt-12 flex justify-center items-center gap-2">
+
+    {% if restaurants.has_previous %}
+    <a href="?page={{ restaurants.previous_page_number }}{% if selected_category %}&category={{ selected_category }}{% endif %}"
+        class="w-10 h-10 flex items-center justify-center rounded-full bg-white text-emerald-600 border border-gray-200 hover:bg-emerald-50 hover:border-emerald-200 transition shadow-sm"
+        title="Previous">
+        <i class="fa-solid fa-chevron-left"></i>
+    </a>
+    {% else %}
+    <span
+        class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-50 text-gray-300 border border-gray-100 cursor-not-allowed">
+        <i class="fa-solid fa-chevron-left"></i>
+    </span>
+    {% endif %}
+
+    <div class="hidden sm:flex gap-2">
+        {% for i in restaurants.paginator.page_range %}
+        {% if restaurants.number == i %}
+        <span
+            class="w-10 h-10 flex items-center justify-center rounded-full bg-emerald-600 text-white font-bold shadow-md">
+            {{ i }}
+        </span>
+        {% else %}
+        {% if i > restaurants.number|add:'-3' and i < restaurants.number|add:'3' %} <a
+            href="?page={{ i }}{% if selected_category %}&category={{ selected_category }}{% endif %}"
+            class="w-10 h-10 flex items-center justify-center rounded-full bg-white text-gray-600 border border-gray-200 hover:bg-emerald-50 hover:text-emerald-700 transition shadow-sm font-medium">
+            {{ i }}
+            </a>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+    </div>
+
+    {% if restaurants.has_next %}
+    <a href="?page={{ restaurants.next_page_number }}{% if selected_category %}&category={{ selected_category }}{% endif %}"
+        class="w-10 h-10 flex items-center justify-center rounded-full bg-white text-emerald-600 border border-gray-200 hover:bg-emerald-50 hover:border-emerald-200 transition shadow-sm"
+        title="Next">
+        <i class="fa-solid fa-chevron-right"></i>
+    </a>
+    {% else %}
+    <span
+        class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-50 text-gray-300 border border-gray-100 cursor-not-allowed">
+        <i class="fa-solid fa-chevron-right"></i>
+    </span>
+    {% endif %}
+
+</div>
+
+<div class="sm:hidden text-center mt-4 text-sm text-gray-500">
+    Page {{ restaurants.number }} of {{ restaurants.paginator.num_pages }}
+</div>
+{% endif %}
+
 {% endblock %}
