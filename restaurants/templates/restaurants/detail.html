@@ -1,0 +1,80 @@
+{% extends 'restaurants/base.html' %}
+
+{% block content %}
+
+<div class="max-w-4xl mx-auto">
+    <a href="{% url 'list' %}"
+        class="inline-flex items-center text-gray-500 hover:text-emerald-600 mb-6 transition group">
+        <i class="fa-solid fa-arrow-left mr-2 group-hover:-translate-x-1 transition-transform"></i>
+        Back to List
+    </a>
+
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div class="bg-gray-800 h-64 flex items-center justify-center relative">
+            <i class="fa-solid fa-bowl-food text-6xl text-gray-600"></i>
+            <div class="absolute bottom-0 left-0 p-6 w-full bg-gradient-to-t from-black/80 to-transparent">
+                <h1 class="text-3xl md:text-4xl font-bold text-white">{{ restaurant.name }}</h1>
+                <p class="text-gray-300 mt-1 flex items-center gap-2">
+                    <i class="fa-solid fa-tag"></i> {{ restaurant.category.name }}
+                </p>
+            </div>
+        </div>
+
+        <div class="p-6 md:p-10">
+            <div class="flex flex-wrap gap-4 mb-8 border-b border-gray-100 pb-6">
+                {% if restaurant.is_fully_halal %}
+                <div
+                    class="bg-green-50 text-green-700 px-4 py-3 rounded-lg flex items-center gap-3 border border-green-200 w-full md:w-auto">
+                    <i class="fa-solid fa-certificate text-2xl"></i>
+                    <div>
+                        <p class="font-bold text-sm">Fully Halal Certified</p>
+                        <p class="text-xs">No alcohol or pork served on premises.</p>
+                    </div>
+                </div>
+                {% else %}
+                <div
+                    class="bg-yellow-50 text-yellow-700 px-4 py-3 rounded-lg flex items-center gap-3 border border-yellow-200 w-full md:w-auto">
+                    <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+                    <div>
+                        <p class="font-bold text-sm">Halal Options Available</p>
+                        <p class="text-xs">Please confirm ingredients with staff.</p>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="md:col-span-2 space-y-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3 border-l-4 border-emerald-500 pl-3">
+                            About
+                        </h3>
+                        <p class="text-gray-600 leading-relaxed text-lg">
+                            {{ restaurant.description }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 p-6 rounded-xl h-fit border border-gray-100">
+                    <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-map"></i> Location & Contact
+                    </h3>
+
+                    <div class="mb-6">
+                        <p class="text-xs text-gray-500 uppercase font-semibold mb-1">Address</p>
+                        <p class="text-gray-700 text-sm">
+                            {{ restaurant.address }}
+                        </p>
+                    </div>
+
+                    <a href="https://www.google.com/maps/search/?api=1&query={{ restaurant.address }}" target="_blank"
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-2.5 rounded-lg transition text-sm font-semibold flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-map-location-dot"></i> Open in Google Maps
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
