@@ -21,11 +21,64 @@
 
 <body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
 
-    <nav class="bg-emerald-600 text-white shadow-lg">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="{% url 'list' %}" class="text-xl font-bold flex items-center gap-2">
-                <i class="fa-solid fa-mosque"></i> Kobe Halal Guide
-            </a>
+    <nav class="bg-emerald-600 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+
+                <a href="{% url 'list' %}"
+                    class="text-xl font-bold flex items-center gap-2 hover:text-emerald-100 transition">
+                    <i class="fa-solid fa-mosque"></i> Kobe Halal Guide
+                </a>
+
+                <div class="hidden md:flex items-center gap-4">
+                    {% if user.is_authenticated %}
+                    <a href="/admin/"
+                        class="bg-emerald-700 hover:bg-emerald-800 text-white border border-emerald-500 px-4 py-2 rounded-lg font-medium transition flex items-center gap-2">
+                        <i class="fa-solid fa-gauge-high"></i> Dashboard
+                    </a>
+
+                    <a href="{% url 'logout' %}"
+                        class="text-emerald-100 hover:text-white text-sm font-medium transition">
+                        Logout
+                    </a>
+                    {% else %}
+                    <a href="/admin/login/"
+                        class="bg-white text-emerald-600 hover:bg-emerald-50 px-5 py-2 rounded-lg font-bold transition shadow-sm flex items-center gap-2">
+                        <i class="fa-solid fa-user-lock"></i> Admin Login
+                    </a>
+                    {% endif %}
+                </div>
+
+                <button id="mobile-menu-btn"
+                    class="md:hidden text-white focus:outline-none hover:text-emerald-200 transition">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+
+            <div id="mobile-menu" class="hidden md:hidden pb-4 border-t border-emerald-500 mt-2 pt-2">
+                <div class="flex flex-col space-y-3">
+                    {% if user.is_authenticated %}
+                    <div class="flex items-center gap-2 text-emerald-100 px-2 py-1">
+                        <i class="fa-solid fa-user-circle"></i>
+                        <span>Welcome, {{ user.username }}</span>
+                    </div>
+                    <a href="/admin/"
+                        class="block text-center bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-2 rounded-lg font-medium transition">
+                        <i class="fa-solid fa-gauge-high mr-2"></i> Go to Dashboard
+                    </a>
+
+                    <a href="{% url 'logout' %}"
+                        class="block text-center text-emerald-100 hover:text-white text-sm py-2">
+                        Logout
+                    </a>
+                    {% else %}
+                    <a href="/admin/login/"
+                        class="block text-center bg-white text-emerald-600 hover:bg-emerald-50 px-4 py-2 rounded-lg font-bold transition shadow-sm">
+                        <i class="fa-solid fa-user-lock mr-2"></i> Admin Login
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -39,6 +92,15 @@
             Developed by Firas © 2026 - Community Support Initiative in Kobe
         </p>
     </footer>
+
+    <script>
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    </script>
 
 </body>
 
