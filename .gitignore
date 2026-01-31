@@ -1,4 +1,18 @@
-.venv
+# Python & Django Internals
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual Environment
+.venv/
+venv/
+
+# Database
 *.sqlite3
-__pycache__
+
+# Mac OS
 .DS_Store
+
+# Media & Static Files
+media/
+staticfiles/
