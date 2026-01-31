@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Place, Category 
+from django.contrib.auth import logout
 
 def restaurant_list(request):
     places = Place.objects.all()
@@ -21,3 +22,7 @@ def restaurant_detail(request, pk):
     return render(request, 'restaurants/detail.html', {
         'restaurant': place
     })
+
+def custom_logout(request):
+    logout(request)
+    return redirect('list')
