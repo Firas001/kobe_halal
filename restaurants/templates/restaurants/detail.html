@@ -106,10 +106,17 @@
                         </div>
                     </div>
 
-                    <a href="https://www.google.com/maps/search/?api=1&query={{ restaurant.address }}" target="_blank"
+                    {% if restaurant.coordinates %}
+                    <a href="https://www.google.com/maps?q={{ restaurant.coordinates }}" target="_blank"
                         class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-3 rounded-lg transition text-sm font-semibold flex items-center justify-center gap-2 shadow-sm hover:shadow">
-                        <i class="fa-solid fa-location-arrow"></i> Open in Google Maps
+                        <i class="fa-solid fa-location-arrow"></i> Open Location
                     </a>
+                    {% else %}
+                    <a href="https://www.google.com/maps?q={{ restaurant.address }}" target="_blank"
+                        class="block w-full bg-gray-600 hover:bg-gray-700 text-white text-center py-3 rounded-lg transition text-sm font-semibold flex items-center justify-center gap-2 shadow-sm hover:shadow">
+                        <i class="fa-solid fa-magnifying-glass"></i> Search Address
+                    </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
