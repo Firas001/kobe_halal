@@ -1,0 +1,62 @@
+{% extends "admin/login.html" %}
+
+{% block content %}
+{{ block.super }}
+
+<div id="demo-box"
+    class="mt-8 bg-white border border-gray-200 rounded-lg shadow-sm p-6 text-center max-w-sm mx-auto transition-all duration-300">
+    <h3 class="text-lg font-bold text-gray-800 mb-2">
+        <i class="fa-solid fa-rocket text-emerald-600 mr-2"></i> Demo Access
+    </h3>
+    <p class="text-sm text-gray-500 mb-4">
+        Click below to auto-fill credentials
+    </p>
+
+    <div id="demo-btn" onclick="fillCredentials()"
+        class="bg-emerald-50 hover:bg-emerald-100 cursor-pointer rounded p-4 border border-emerald-100 transition-all duration-200 group relative">
+
+        <div id="demo-content" class="space-y-2">
+            <div class="flex justify-between items-center">
+                <span class="font-semibold text-emerald-800">User:</span>
+                <span class="font-mono bg-white px-2 py-1 rounded border text-gray-600">demo</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="font-semibold text-emerald-800">Pass:</span>
+                <span class="font-mono bg-white px-2 py-1 rounded border text-gray-600">demo12345</span>
+            </div>
+        </div>
+
+        <div id="demo-success"
+            class="hidden absolute inset-0 items-center justify-center text-emerald-700 font-bold bg-emerald-100 rounded">
+            <i class="fa-solid fa-check-circle mr-2"></i> Auto-filled!
+        </div>
+    </div>
+</div>
+
+<script>
+    let isFilled = false;
+
+    function fillCredentials() {
+        if (isFilled) return;
+        const usernameField = document.getElementById('id_username');
+        const passwordField = document.getElementById('id_password');
+
+        if (usernameField && passwordField) {
+            usernameField.value = 'demo';
+            passwordField.value = 'demo12345';
+
+            usernameField.style.backgroundColor = "#ecfdf5";
+            passwordField.style.backgroundColor = "#ecfdf5";
+        }
+        const btn = document.getElementById('demo-btn');
+        const content = document.getElementById('demo-content');
+        const successMsg = document.getElementById('demo-success');
+        content.classList.add('opacity-0');
+        successMsg.classList.remove('hidden');
+        successMsg.classList.add('flex');
+        btn.classList.remove('cursor-pointer', 'hover:bg-emerald-100');
+        btn.classList.add('cursor-default');
+        isFilled = true;
+    }
+</script>
+{% endblock %}

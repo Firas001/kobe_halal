@@ -19,6 +19,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+admin.site.login_template = "admin/login_custom.html"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('restaurants.urls')),
