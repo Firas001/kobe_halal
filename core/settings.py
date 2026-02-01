@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import os
+from django.templatetags.static import static
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -61,6 +62,14 @@ UNFOLD = {
             "950": "2 44 34",
         },
     },
+    "SITE_FAVICONS": [
+        {
+            "rel": "icon",
+            "type": "image/x-icon",
+            "sizes": "106x106",
+            "href": lambda request: static("favicon.ico"),
+        },
+    ],
 }
 
 MIDDLEWARE = [
