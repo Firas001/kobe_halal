@@ -3,6 +3,8 @@
 ## 📖 About the Project
 This project was developed as part of the **Fundamentals of Computer Programming Python (2025-2026)** course at **Kobe Institute of Computing (KIC)**.
 
+📄 **[Class Presentation](presentation/presentation.pdf)**
+
 ### The Problem
 Finding reliable **Halal food** in Japan can be difficult for Muslim residents and tourists. Information is often scattered or outdated.
 
